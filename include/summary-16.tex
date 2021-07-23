@@ -1,56 +1,31 @@
-The \textbf{first incompleteness theorem} states that for any
-consistent, !!{axiomatizable} theory~$\Th{T}$ that extends $\Th{Q}$,
-there is !!a{sentence}~$!G_\Th{T}$ such that $\Th{T} \Proves/
-!G_\Th{T}$. $!G_\Th{T}$ is constructed in such a way that $!G_\Th{T}$,
-in a roundabout way, says ``$\Th{T}$ does not prove~$!G_\Th{T}$.''
-Since $\Th{T}$ does not, in fact, prove it, what it says is true. If
-$\Sat{N}{\Th{T}}$, then $\Th{T}$ does not prove any false claims, so
-$\Th{T} \Proves/ \lnot !G_\Th{T}$. Such !!a{sentence} is
-\textbf{independent} or \textbf{undecidable} in~$\Th{T}$.  G\"odel's
-original proof established that $!G_\Th{T}$ is independent on the
-assumption that $\Th{T}$ is \textbf{$\omega$-consistent}. Rosser
-improved the result by finding a different sentence~$!R_\Th{T}$ with
-is neither provable nor refutable in~$\Th{T}$ as long as $\Th{T}$ is
-simply consistent.
-
-The construction of~$!G_\Th{T}$ is effective: given an axiomatization
-of~$\Th{T}$ we could, in principle, write down~$!G_\Th{T}$. The
-``roundabout way'' in which $!G_\Th{T}$ states its own unprovability,
-is a special case of a general result, the \textbf{fixed-point
-  lemma}. It states that for any !!{formula}~$!B(y)$ in~$\Lang{L_A}$,
-there is !!a{sentence}~$!A$ such that $\Th{Q} \Proves !A \liff
-!B(\gn{!A})$. (Here, $\gn{!A}$ is the standard numeral for the G\"odel
-number of~$!A$, i.e., $\num{\Gn{!A}}$.)  To obtain $!G_\Th{T}$, we use
-the !!{formula}~$\lnot\OProv[\Th{T}](y)$ as~$!B(y)$.  We get
-$\OProv[\Th{T}]$ as the culmination of our previous efforts: We know
-that $\Prf[\Th{T}](n, m)$, which holds if $n$ is the G\"odel number of
-!!a{derivation} of the !!{sentence} with G\"odel number~$m$
-from~$\Th{T}$, is primitive recursive. We also know that $\Th{Q}$
-represents all primitive recursive relations, and so there is some
-!!{formula} $\OPrf[\Th{T}](x,y)$ that represents~$\Prf[\Th{T}]$
-in~$\Th{Q}$.  The \textbf{provability predicate} for $\Th{T}$ is
-$\Prov[\Th{T}](y)$ is $\lexists[x][\Prf[\Th{T}](x, y)]$ then expresses
-provability in~$\Th{T}$. (It doesn't represent it though: if $\Th{T}
-\Proves !A$, then $\Th{Q} \Proves \OProv[\Th{T}](\gn{!A})$; but if
-$\Th{T} \Proves/ !A$, then $\Th{Q}$ does not in general prove $\lnot
-\OProv[\Th{T}](\gn{!A})$.)
-
-The \textbf{second incompleteness theorem} establishes that the
-!!{sentence}~$\OCon[\Th{T}]$ that expresses that $\Th{T}$ is
-consistent, i.e., $\Th{T}$ also does not prove
-$\lnot \OProv[\Th{T}](\gn{\lfalse})$.  The proof of the second
-incompleteness theorem requires some additional conditions
-on~$\Th{T}$, the
-\textbf{provability conditions}. $\Th{PA}$ satisfies them,
-although~$\Th{Q}$ does not.  Theories that satisfy the provability
-conditions also satisfy \textbf{L\"ob's theorem}: $\Th{T} \Proves
-\OProv[\Th{T}](\gn{!A}) \lif !A$ iff $\Th{T} \Proves !A$.
-
-The fixed-point theorem also has another important consequence. We say
-a relation $R(n)$ is \textbf{definable} in $\Lang{L_A}$ if there is
-!!a{formula} $!A_R(x)$ such that $\Sat{N}{!A_R(\num{n})}$ iff $R(n)$
-holds. For instance, $\Prov[\Th{T}]$ is definable, since
-$\OProv[\Th{T}]$ defines it. The property $n$ has iff it is the
-G\"odel number of !!a{sentence} true in~$\Struct{N}$, however, is not
-definable. This is \textbf{Tarski's theorem} about the undefinability
-of truth.
+The proof of the incompleteness theorems requires that we have a way
+to talk about provability in a theory (such as $\Th{PA}$) in the
+language of the theory itself, i.e., in the language of
+arithmetic. But the language of arithmetic only deals with numbers,
+not with formulas or !!{derivation}s.  The solution to this problem is
+to define a systematic mapping from !!{formula}s and derivations to
+numbers. The number associated with !!a{formula} or !!a{derivation}
+is called its \textbf{G\"odel number}.  If $!A$ is !!a{formula},
+$\Gn{!A}$ is its G\"odel number. We showed that important operations on
+!!{formula}s turn into primitive
+recursive functions on the respective G\"odel
+numbers. For instance, $\Subst{!A}{t}{x}$, the operation of
+substituting a term~$t$ for every free occurrence of~$x$ in~$!A$,
+corresponds to an arithmetical function $\fn{subst}(n,m,k)$ which, if
+applied to the G\"odel numbers of $!A$, $t$, and $x$, yields the
+G\"odel number of~$\Subst{!A}{t}{x}$. In other words,
+$\fn{subst}(\Gn{!A}, \Gn{t}, \Gn{x}) = \Gn{\Subst{!A}{t}{x}}$.
+Likewise, properties of !!{derivation}s
+turn into primitive recursive relations on the respective G\"odel
+numbers.  In particular, the property $\fn{Deriv}(n)$ that holds
+of~$n$ if it is the G\"odel number of a correct !!{derivation} in
+natural deduction, is primitive recursive.  Showing that these are
+primitive recursive required a fair amount of work, and at times some
+ingenuity, and depended essentially on the fact that operating with
+sequences is primitive recursive.  If a theory~$\Th{T}$ is
+!!{decidable}, then we can use $\fn{Deriv}$ to define !!a{decidable}
+relation $\Prf[\Th{T}](n, m)$ which holds if $n$ is the G\"odel number
+of !!a{derivation} of the !!{sentence} with G\"odel number~$m$
+from~$\Th{T}$.  This relation is primitive recursive if the set of
+axioms of~$\Th{T}$ is, and merely general recursive if the axioms
+of~$\Th{T}$ are !!{decidable} but not primitive recursive.
